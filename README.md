@@ -8,7 +8,7 @@
 ## Results
 
 The following shows example predictions of the model:
-<p align="center"><img src="result.png" width = 80%></p>
+<p align="center"><img src="result.png" width = 60%></p>
 
 
 
