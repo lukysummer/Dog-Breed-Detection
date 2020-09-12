@@ -65,10 +65,7 @@ loaders['test'] = torch.utils.data.DataLoader(test_data,
 
 ################## 2. BUILD THE MODEL W/ PRE-TRAINED RESNET ###################
 # (1) Import the pre-trained RESNET18 model
-resnet_model = models.resnet18(pretrained = True)
-model_transfer = resnet_model
-if use_cuda:
-    model_transfer = model_transfer.cuda()
+model_transfer = models.resnet18(pretrained = True)
 
 # (2) Freeze the gradients of the model
 for param in model_transfer.parameters():
@@ -76,6 +73,12 @@ for param in model_transfer.parameters():
 
 # (3) Change the model's fully connected layer to the desired outputsize of 133 (= number of dogbreeds)
 model_transfer.fc = nn.Linear(model_transfer.fc.in_features, 133)    
+
+if use_cuda:
+    print("Using GPU.")
+    model_transfer = model_transfer.cuda()
+else:
+    print("Using CPU.")
 
 
 ##################### 3. TRAIN THE MODEL'S LAST FC LAYER ######################
